@@ -8,9 +8,9 @@ create table if not exists car
 	color varchar(255) null,
 	year date null,
 	engine varchar(255) null,
-	seats varchar(32) null,
-	transmission varchar(32) not null,
-	categories varchar(32) not null
+	seats enum('leather', 'textile') null,
+	transmission enum('automatic', 'manual') not null,
+	categories enum('small', 'family', 'van') not null
 );
 
 create table if not exists customer
@@ -49,7 +49,7 @@ create table if not exists invoice
 		primary key,
 	created datetime(6) not null,
 	modified datetime(6) not null,
-	status varchar(32) not null,
+	status enum('pending', 'final') not null,
 	price decimal(10,2) not null,
 	note varchar(1024) not null,
 	booking_id int null,

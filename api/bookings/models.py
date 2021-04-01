@@ -1,5 +1,6 @@
 from django.core.validators import MinValueValidator
 from django.db import models
+from django_mysql.models import EnumField
 
 from api.bookings.enums import INVOICE_STATUS
 from api.cars.models import Car
@@ -24,7 +25,7 @@ class Booking(AbstractDateTime):
 
 class BookingInvoice(AbstractDateTime):
     booking = models.OneToOneField(Booking, on_delete=models.SET_NULL, null=True)
-    status = models.CharField(max_length=32, choices=INVOICE_STATUS)
+    status = EnumField(choices=INVOICE_STATUS)
     price = models.DecimalField(decimal_places=2, max_digits=10, validators=[MinValueValidator(1.0)])
     note = models.CharField(max_length=1024)
 

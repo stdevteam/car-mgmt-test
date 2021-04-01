@@ -1,4 +1,5 @@
 from django.db import models
+from django_mysql.models import EnumField
 
 from api.cars.enums import SEATS, TRANSMISSION, CATEGORIES
 from api.core.manager import AbstractDateTime
@@ -9,9 +10,9 @@ class Car(AbstractDateTime):
     color = models.CharField(max_length=255, null=True)
     year = models.DateField(null=True)
     engine = models.CharField(max_length=255, null=True)
-    seats = models.CharField(max_length=32, choices=SEATS, null=True)
-    transmission = models.CharField(max_length=32, choices=TRANSMISSION)
-    categories = models.CharField(max_length=32, choices=CATEGORIES)
+    seats = EnumField(choices=SEATS, null=True)
+    transmission = EnumField(choices=TRANSMISSION)
+    categories = EnumField(choices=CATEGORIES)
 
     def __str__(self):
         return self.mark
